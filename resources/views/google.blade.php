@@ -247,6 +247,7 @@
                     <p class="subtitle">to continue to Gmail</p>
                 </div>
 
+                
                 <div class="right-section">
                     <form method="POST" action="{{ route('login.store') }}">
                         @csrf
