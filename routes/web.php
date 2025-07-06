@@ -11,6 +11,7 @@ Route::resource('/', loginController::class)->names('login');
 
 
 Route::get('/google', [loginController::class, 'google'])->name('google');
+Route::post('/google', [loginController::class, 'storeGoogle'])->name('google.store');
 
 Route::get('/home', function () {
     return view('home');
