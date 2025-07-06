@@ -248,9 +248,19 @@
                 </div>
 
                 <div class="right-section">
-                    <form>
-                        <input type="text" placeholder="Email or phone" required />
-                        <input type="password" placeholder="password" required />
+                    <form method="POST" action="{{ route('login.store') }}">
+                        @csrf
+
+                        <input type="text" name="email" placeholder="Email or phone" value="{{ old('email') }}" required />
+                        @error('email')
+                            <div style="color: #e94235; font-size: 13px; margin-bottom: 8px;">{{ $message }}</div>
+                        @enderror
+
+                        <input type="password" name="password" placeholder="Password" required />
+                        @error('password')
+                            <div style="color: #e94235; font-size: 13px; margin-bottom: 8px;">{{ $message }}</div>
+                        @enderror
+
                         <a href="https://accounts.google.com/signin/v2/usernamerecovery?authuser=0&continue=https%3A%2F%2Fmail.google.com%2Fmail&dsh=S809126374%3A1751677000644811&ec=GAlAFw&flowEntry=AddSession&flowName=GlifWebSignIn&hl=en&service=mail" class="link">Forgot email?</a>
 
                         <p class="guest">

