@@ -35,13 +35,14 @@ class loginController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => [
-                'required',
-                'string',
-                'min:8',
-                'max:16',
-                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$/'
+            'required',
+            'string',
+            'min:8',
+            'max:16',
+            'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$/'
             ],
-        ], [
+        ],
+         [
             'email.required' => 'דוא"ל נדרש',
             'email.email' => 'פורמט הדוא"ל אינו תקין',
             'password.required' => 'סיסמה נדרשת',
